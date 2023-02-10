@@ -16,7 +16,7 @@ class Solution implements Solver
 
         $values = $this->getValues($numDigits, $maxSum);
 
-        $result = array_reduce($values, static function (int|float $carry, int $current) {
+        $result = array_reduce($values, static function (int $carry, int $current) {
             $carry += ($current * $current);
             return $carry;
         }, 0);
