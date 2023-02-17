@@ -26,16 +26,14 @@ readonly class Tester
             }
 
             $expected = trim(file_get_contents($outPath));
-            $tests = file($inPath, FILE_SKIP_EMPTY_LINES);
+            $values = file($inPath, FILE_SKIP_EMPTY_LINES);
 
-            foreach ($tests as $test) {
-                $result = $this->solver->solve($test);
-                echo $expected === $result
-                    ? "Test $iteration: Success"
-                    : "Test $iteration: Failure - ($expected != $result)";
+            $result = $this->solver->solve(...$values);
+            echo $expected === $result
+                ? "Test $iteration: Success"
+                : "Test $iteration: Failure - ($expected != $result)";
 
-                echo PHP_EOL;
-            }
+            echo PHP_EOL;
 
             $iteration++;
         }

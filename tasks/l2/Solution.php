@@ -9,9 +9,9 @@ class Solution implements Solver
 {
     private array $memo = [];
 
-    public function solve(string $input): string
+    public function solve(string ...$input): string
     {
-        $numDigits = (int)$input;
+        $numDigits = (int)$input[0];
         $maxSum = 9 * $numDigits;
 
         $values = $this->getValues($numDigits, $maxSum);
