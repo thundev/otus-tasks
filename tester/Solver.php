@@ -5,5 +5,5 @@ namespace tester;
 
 interface Solver
 {
-    public function solve(string ...$input): string;
+    public function solve(string ...$input): array;
 }

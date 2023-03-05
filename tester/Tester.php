@@ -25,13 +25,31 @@ readonly class Tester
                 return;
             }
 
-            $expected = trim(file_get_contents($outPath));
-            $values = file($inPath, FILE_SKIP_EMPTY_LINES);
+            $in = file($inPath, FILE_SKIP_EMPTY_LINES);
+            $out = file($outPath, FILE_SKIP_EMPTY_LINES);
 
-            $result = $this->solver->solve(...$values);
-            echo $expected === $result
-                ? "Test $iteration: Success"
-                : "Test $iteration: Failure - ($expected != $result)";
+            if (!$in || !$out) {
+                continue;
+            }
+
+            $in = array_map('trim', $in);
+            $out = array_map('trim', $out);
+
+            $result = $this->solver->solve(...$in);
+
+            $succeeded = false;
+
+            for ($i = 0, $iMax = count($out); $i < $iMax; $i++) {
+                $succeeded = $result[$i] === $out[$i];
+                if (!$succeeded) {
+                    echo "Test $iteration: Failure - (" . implode(",", $out) . " != " . implode(",", $result) . ")";
+                    break;
+                }
+            }
+
+            if ($succeeded) {
+                echo "Test $iteration: Success";
+            }
 
             echo PHP_EOL;
 
