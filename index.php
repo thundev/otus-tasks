@@ -1,15 +1,22 @@
 <?php
 declare(strict_types=1);
 
-require_once 'tester/Solver.php';
-require_once 'tester/Tester.php';
-require_once 'tasks/l5/king/Solution.php';
-require_once 'tasks/l5/knight/Solution.php';
+require_once 'tasks/l6/Sort.php';
+require_once 'tasks/l8/MergeSort.php';
+require_once 'tasks/l9/LinkedList.php';
+require_once 'tasks/l9/BucketSort.php';
+require_once 'tasks/l9/RadixSort.php';
 
-use tasks\l5\knight\Solution;
-use tester\Tester;
+use tasks\l9\RadixSort;
 
-(new Tester(
-    new Solution(),
-    'tasks/l5/knight/test'
-))->run();
+$array = [];
+for ($i = 0; $i < 1000; $i++) {
+    $array[] = random_int(10, 9999);
+}
+
+$sort = new RadixSort($array);
+$sort->sort();
+
+var_dump($sort->getArray());
+die();
+
